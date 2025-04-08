@@ -5,6 +5,16 @@ on:
 
 jobs:
 
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ macos-latest, windows-latest, ubuntu-latest ]
+        java: [ '8', '11', '17']
+
+  name: Java ${{ matrix.Java }} sample
+  
   test:
     runs-on: ubuntu-latest
     steps:
@@ -13,5 +23,5 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: ${{ matrix.java }}
       - run: mvn test
