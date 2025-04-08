@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
   build:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -12,11 +11,8 @@ jobs:
       matrix:
         os: [ macos-latest, windows-latest, ubuntu-latest ]
         java: [ '8', '11', '17']
+    name: Java ${{ matrix.Java }} sample
 
-  name: Java ${{ matrix.Java }} sample
-  
-  test:
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
